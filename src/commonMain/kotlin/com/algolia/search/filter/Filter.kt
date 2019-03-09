@@ -126,3 +126,5 @@ internal sealed class FacetValue<T> {
 }
 
 internal fun Attribute.escape() = "\"$raw\""
+
+internal fun String.escape() = "\"$this\""

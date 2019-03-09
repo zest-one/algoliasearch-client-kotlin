@@ -1,4 +1,6 @@
 import kotlinx.coroutines.runBlocking
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 import kotlin.reflect.KClass
 import kotlin.test.*
 
@@ -15,8 +17,13 @@ internal fun Any?.shouldBeNull() {
     assertNull(this)
 }
 
-internal fun Any?.shouldNotBeNull() {
+@UseExperimental(ExperimentalContracts::class)
+internal fun <T : Any> T?.shouldNotBeNull(): T {
+    contract {
+        returns() implies (this@shouldNotBeNull != null)
+    }
     assertNotNull(this)
+    return this
 }
 
 internal fun Boolean.shouldBeTrue() {
