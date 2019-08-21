@@ -3,10 +3,7 @@ package transport
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.helper.toApplicationID
-import com.algolia.search.transport.hasFailed
-import com.algolia.search.transport.hasTimedOut
-import com.algolia.search.transport.reset
-import com.algolia.search.transport.searchHosts
+import com.algolia.search.transport.*
 import shouldEqual
 import kotlin.test.Test
 
@@ -64,5 +61,17 @@ internal class TestRetryableHost {
             it.isUp shouldEqual false
             it.retryCount shouldEqual 1
         }
+    }
+
+    @Test
+    fun computeTimeout() {
+        host.apply {
+            retryCount = 0
+        }
+        host.computeTimeout(2000) shouldEqual 2000
+        host.apply {
+            retryCount = 1
+        }
+        host.computeTimeout(2000) shouldEqual 4000
     }
 }

@@ -3,6 +3,8 @@ package suite
 import clientAdmin1
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.configuration.ConfigurationSearch
+import com.algolia.search.configuration.RetryableHost
+import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.serialize.Json
@@ -25,11 +27,9 @@ internal class TestSuiteDNS {
     private val readTimeout = 500L
     private val shouldTimeout = 600L
     private val shouldNotTimeout = 400L
-    private var requestCount = 0
     private val mockEngine = MockEngine {
-        val delay = if (requestCount == 0) shouldTimeout else shouldNotTimeout
+        val delay = if (it.url.host == "algolia.biz") shouldTimeout else shouldNotTimeout
 
-        requestCount++
         delay(delay)
         content
     }
@@ -41,12 +41,19 @@ internal class TestSuiteDNS {
         ),
         content = ByteReadChannel(Json.stringify(ResponseSearch.serializer(), ResponseSearch()))
     )
+    private val appID = clientAdmin1.applicationID
     private val client = ClientSearch(
         ConfigurationSearch(
             clientAdmin1.applicationID,
             clientAdmin1.apiKey,
             readTimeout = readTimeout,
             engine = mockEngine,
+            hosts = listOf(
+                RetryableHost("algolia.biz"),
+                RetryableHost("$appID-1.algolianet.com"),
+                RetryableHost("$appID-2.algolianet.com"),
+                RetryableHost("$appID-3.algolianet.com")
+            ),
             logLevel = LogLevel.INFO
         )
     )
@@ -57,7 +64,12 @@ internal class TestSuiteDNS {
             val index = client.initIndex(IndexName("test"))
 
             index.search()
-            client.transport.hosts.first().retryCount shouldEqual 1
+            client.transport.apply {
+                hosts[0].retryCount shouldEqual 1
+                hosts[1].retryCount shouldEqual 0
+                hosts[2].retryCount shouldEqual 0
+                hosts[3].retryCount shouldEqual 0
+            }
         }
     }
 }

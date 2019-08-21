@@ -53,3 +53,7 @@ internal fun List<RetryableHost>.expireHostsOlderThan(hostStatusExpirationDelayM
 internal fun List<RetryableHost>.filterCallType(callType: CallType): List<RetryableHost> {
     return filter { it.callType == callType || it.callType == null }
 }
+
+internal fun RetryableHost.computeTimeout(timeout: Long): Long {
+    return (retryCount + 1) * timeout
+}
