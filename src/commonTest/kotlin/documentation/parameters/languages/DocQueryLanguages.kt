@@ -4,7 +4,9 @@ import com.algolia.search.dsl.query
 import com.algolia.search.dsl.queryLanguages
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.IgnorePlurals
+import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.RemoveStopWords
+import com.algolia.search.model.settings.Settings
 import documentation.index
 import runBlocking
 import kotlin.test.Ignore

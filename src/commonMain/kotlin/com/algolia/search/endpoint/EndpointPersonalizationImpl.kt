@@ -24,7 +24,7 @@ internal class EndpointPersonalizationImpl(
         return transport.request(
             HttpMethod.Post,
             CallType.Write,
-            "$RouteRecommendation/personalization/strategy",
+            "$RouteRecommendation/personalization",
             requestOptions,
             body
         )
@@ -34,7 +34,7 @@ internal class EndpointPersonalizationImpl(
         return transport.request(
             HttpMethod.Get,
             CallType.Read,
-            "$RouteRecommendation/personalization/strategy",
+            "$RouteRecommendation/personalization",
             requestOptions
         )
     }

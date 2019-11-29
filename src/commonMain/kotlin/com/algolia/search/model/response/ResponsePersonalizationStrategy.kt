@@ -19,13 +19,9 @@ public data class ResponsePersonalizationStrategy(
     /**
      * [EventScoring] associated to each [EventName].
      */
-    @SerialName(KeyEventsScoring) val eventsScoring: Map<EventName, EventScoring>,
+    @SerialName(KeyEventsScoring) val eventsScoring: List<EventScoring>,
     /**
      * [FacetScoring] associated to each [Attribute].
      */
-    @SerialName(KeyFacetsScoring) val facetsScoring: Map<Attribute, FacetScoring>,
-    /**
-     * The [TaskID] which can be used with the [EndpointAdvanced.waitTask] method.
-     */
-    @SerialName(KeyTaskID) override val taskID: TaskID
-) : Task
+    @SerialName(KeyFacetsScoring) val facetsScoring: List<FacetScoring>
+)

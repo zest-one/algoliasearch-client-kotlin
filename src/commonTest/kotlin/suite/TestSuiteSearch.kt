@@ -3,7 +3,6 @@ package suite
 import clientAdmin1
 import clientSearch
 import com.algolia.search.dsl.*
-import com.algolia.search.helper.readContent
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
@@ -15,7 +14,6 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import io.ktor.client.features.ResponseException
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.list

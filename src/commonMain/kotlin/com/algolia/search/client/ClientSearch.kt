@@ -9,11 +9,14 @@ import com.algolia.search.helper.sha256
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.model.*
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
+import com.algolia.search.model.personalization.PersonalizationStrategy
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.ResponseLogs
+import com.algolia.search.model.response.ResponsePersonalizationStrategy
 import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.DeletionAPIKey
+import com.algolia.search.model.response.revision.Revision
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyLength
@@ -38,9 +41,11 @@ public class ClientSearch private constructor(
     EndpointMultipleIndex by EndpointMultipleIndexImpl(transport),
     EndpointAPIKey by EndpointAPIKeyImpl(transport),
     EndpointMultiCluster by EndpointMulticlusterImpl(transport),
-    EndpointPersonalization by EndpointPersonalizationImpl(transport),
+    EndpointPersonalization,
     Configuration by transport,
     Credentials by transport.credentials {
+
+    private val recommendation = EndpointPersonalizationImpl(transport)
 
     public constructor(
         applicationID: ApplicationID,
@@ -56,6 +61,19 @@ public class ClientSearch private constructor(
     public constructor(
         configuration: ConfigurationSearch
     ) : this(Transport(configuration, configuration))
+
+    @Deprecated(level = DeprecationLevel.ERROR, message = "Use the ClientRecommendation instead.")
+    override suspend fun setPersonalizationStrategy(
+        strategy: PersonalizationStrategy,
+        requestOptions: RequestOptions?
+    ): Revision {
+        return recommendation.setPersonalizationStrategy(strategy, requestOptions)
+    }
+
+    @Deprecated(level = DeprecationLevel.ERROR, message = "Use the ClientRecommendation instead.")
+    override suspend fun getPersonalizationStrategy(requestOptions: RequestOptions?): ResponsePersonalizationStrategy {
+        return recommendation.getPersonalizationStrategy(requestOptions)
+    }
 
     /**
      *  Initialize an [Index] configured with [ConfigurationSearch].
@@ -189,7 +207,7 @@ public class ClientSearch private constructor(
 
                 timestamp - Time.getCurrentTimeMillis()
             } else {
-                throw IllegalArgumentException("The Secured API Key doesn't have a validUntil parameter.");
+                throw IllegalArgumentException("The Secured API Key doesn't have a validUntil parameter.")
             }
         }
     }

@@ -10,9 +10,9 @@ public data class PersonalizationStrategy(
     /**
      * Associate a [EventScoring] to an [EventName].
      */
-    val eventsScoring: Map<EventName, EventScoring>,
+    val eventsScoring: List<EventScoring>,
     /**
      * Associate a [FacetScoring] to an [Attribute].
      */
-    val facetsScoring: Map<Attribute, FacetScoring>
+    val facetsScoring: List<FacetScoring>
 )

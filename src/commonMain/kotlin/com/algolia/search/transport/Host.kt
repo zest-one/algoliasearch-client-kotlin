@@ -1,6 +1,7 @@
 package com.algolia.search.transport
 
 import com.algolia.search.configuration.CallType
+import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.Time
@@ -14,7 +15,10 @@ internal val ApplicationID.searchHosts
         RetryableHost("$this-2.algolianet.com"),
         RetryableHost("$this-3.algolianet.com")
     )
-
+internal val Region.recommendationHosts
+    get() = listOf(
+        RetryableHost("recommendation.$this.algolia.com")
+    )
 internal val insightHosts = listOf(RetryableHost("insights.algolia.io"))
 internal val analyticsHosts = listOf(RetryableHost("analytics.algolia.com"))
 internal val placesHosts = listOf(

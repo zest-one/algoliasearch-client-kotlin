@@ -1,7 +1,4 @@
-import com.algolia.search.client.ClientAnalytics
-import com.algolia.search.client.ClientInsights
-import com.algolia.search.client.ClientPlaces
-import com.algolia.search.client.ClientSearch
+import com.algolia.search.client.*
 import kotlinx.coroutines.CoroutineScope
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -13,6 +10,7 @@ internal expect val clientMcm: ClientSearch
 internal expect val clientAnalytics: ClientAnalytics
 internal expect val clientInsights: ClientInsights
 internal expect val clientPlaces : ClientPlaces
+internal expect val clientRecommendation : ClientRecommendation
 
 internal expect fun runBlocking(
     coroutineContext: CoroutineContext = EmptyCoroutineContext,
