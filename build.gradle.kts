@@ -12,6 +12,7 @@ buildscript {
     dependencies {
         classpath(plugin.Android())
         classpath(plugin.Spotless())
+        classpath(plugin.BinaryCompat())
     }
 }
 
@@ -25,6 +26,7 @@ plugins {
 
 apply(plugin = "com.android.library")
 apply(plugin = "com.diffplug.gradle.spotless")
+apply(plugin = "binary-compatibility-validator")
 
 repositories {
     jcenter()
