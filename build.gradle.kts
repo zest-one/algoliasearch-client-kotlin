@@ -1,7 +1,9 @@
-import com.android.build.gradle.LibraryExtension
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import com.codingfeline.buildkonfig.gradle.BuildKonfigExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
+import org.jetbrains.kotlin.konan.target.HostManager
 import java.net.URI
 
 buildscript {
@@ -12,19 +14,21 @@ buildscript {
     dependencies {
         classpath(plugin.Android())
         classpath(plugin.Spotless())
+        classpath(plugin.BuildKonfig())
     }
 }
 
 plugins {
     id("kotlin-multiplatform") version "1.3.72"
     id("kotlinx-serialization") version "1.3.72"
+    id("com.android.library") version "3.2.1"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
-    id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.5"
 }
 
 apply(plugin = "com.android.library")
 apply(plugin = "com.diffplug.gradle.spotless")
+apply(plugin = "com.codingfeline.buildkonfig")
 
 repositories {
     jcenter()
@@ -39,6 +43,7 @@ version = Library.version
 group = Library.group
 
 allprojects {
+    project.ext.set("hostManager", HostManager())
     tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>> {
         kotlinOptions {
             freeCompilerArgs = listOfNotNull("-Xopt-in=kotlin.RequiresOptIn")
@@ -46,7 +51,9 @@ allprojects {
     }
 }
 
-extensions.getByType(LibraryExtension::class.java).apply {
+apply(from = "gradle/darwin.gradle")
+
+android {
     compileSdkVersion(29)
 
     defaultConfig {
@@ -59,13 +66,10 @@ extensions.getByType(LibraryExtension::class.java).apply {
 
     sourceSets {
         getByName("main") {
-            manifest.srcFile("src/androidMain/AndroidManifest.xml")
-            java.srcDirs("src/androidMain/kotlin")
-            res.srcDirs("src/androidMain/res")
+            setRoot("src/androidMain")
         }
         getByName("test") {
-            java.srcDirs("src/androidTest/kotlin")
-            res.srcDirs("src/androidTest/res")
+            setRoot("src/androidTest")
         }
     }
 
@@ -73,13 +77,11 @@ extensions.getByType(LibraryExtension::class.java).apply {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    testOptions.unitTests.isIncludeAndroidResources = true
-}
-
-buildConfigKotlin {
-    sourceSet("metadata") {
-        buildConfig(name = "version", value = Library.version)
+    libraryVariants.all {
+        generateBuildConfig?.enabled = false
     }
+
+    testOptions.unitTests.isIncludeAndroidResources = true
 }
 
 kotlin {
@@ -101,6 +103,7 @@ kotlin {
             }
         }
     }
+
     sourceSets {
         all {
             languageSettings.progressiveMode = true
@@ -162,6 +165,21 @@ kotlin {
                 implementation(Robolectric())
             }
         }
+        val darwinMain by getting {
+            dependencies {
+                api(Ktor("client-core-native"))
+                api(Ktor("client-json-native"))
+                api(Ktor("client-logging-native"))
+                api(Ktor("client-serialization-native"))
+                api(Ktor("client-ios"))
+            }
+        }
+        val darwinTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(Ktor("client-mock-native"))
+            }
+        }
     }
 }
 
@@ -207,7 +225,6 @@ publishing {
 
     kotlin.targets.forEach { target ->
         val targetPublication = publications.withType<MavenPublication>().findByName(target.name)
-
         targetPublication?.artifact(javadocJar)
     }
 }
@@ -219,8 +236,8 @@ bintray {
 
     pkg.apply {
         desc = "Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries," +
-                "and pre-built integrations. Algolia API Client for Kotlin lets you easily use the Algolia Search" +
-                "REST API from your JVM project, such as Android or backend implementations."
+            "and pre-built integrations. Algolia API Client for Kotlin lets you easily use the Algolia Search" +
+            "REST API from your JVM project, such as Android or backend implementations."
         repo = "maven"
         name = Library.artifact
         websiteUrl = "https://www.algolia.com/"
@@ -241,8 +258,19 @@ tasks {
             setPublications("jvm", "metadata", "androidRelease")
         }
     }
-    withType<KotlinCompile> {
-        dependsOn("generateMetadataBuildConfigKotlin")
+
+    withType<KotlinNativeCompile> {
+        kotlinOptions.freeCompilerArgs =
+            listOf("-Xdisable-phases=Devirtualization,DCEPhase") // @see: https://github.com/JetBrains/kotlin-native/issues/3087
+    }
+}
+
+
+configure<BuildKonfigExtension> {
+    packageName = "com.algolia.search.configuration"
+
+    defaultConfigs {
+        buildConfigField(STRING, "version", Library.version)
     }
 }
 
@@ -253,11 +281,13 @@ tasks.withType<Test> {
 configure<SpotlessExtension> {
     kotlin {
         target("**/*.kt")
-        ktlint("0.36.0").userData(mapOf(
-            // Disable Ktlint import ordering temporarily.
-            // https://github.com/pinterest/ktlint/issues/527
-            "disabled_rules" to "import-ordering"
-        ))
+        ktlint("0.36.0").userData(
+            mapOf(
+                // Disable Ktlint import ordering temporarily.
+                // https://github.com/pinterest/ktlint/issues/527
+                "disabled_rules" to "import-ordering"
+            )
+        )
         trimTrailingWhitespace()
         endWithNewline()
     }
