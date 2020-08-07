@@ -1,0 +1,126 @@
+---
+format_version: '4'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: android
+app:
+    envs:
+        - opts:
+              is_expand: false
+          GRADLE_BUILD_FILE_PATH: build.gradle
+        - opts:
+              is_expand: false
+          GRADLEW_PATH: "./gradlew"
+trigger_map:
+    - push_branch: gh-pages
+      workflow: none
+    - push_branch: master
+      workflow: is_test
+    - push_branch: develop
+      workflow: is_test
+    - push_branch: fix*
+      workflow: is_test
+    - push_branch: feat*
+      workflow: is_test
+    - push_branch: refactor*
+      workflow: is_test
+    - pull_request_source_branch: "*"
+      workflow: is_test
+    - tag: v*.*.*
+      workflow: artifact_deploy
+    - tag: patch
+      workflow: is_deploy
+    - tag: minor
+      workflow: is_deploy
+    - tag: major
+      workflow: is_deploy
+workflows:
+    is_test:
+        steps:
+            - activate-ssh-key@3.1.1:
+                  run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+            - git-clone@4.0.9: {}
+            - cache-pull@2.0.1: {}
+            - install-missing-android-tools@2.1.1: {}
+            - install-bundler@1.0.0: {}
+            - fastlane@2.3.12:
+                  inputs:
+                      - lane: test
+            - deploy-to-bitrise-io@1.3.10: {}
+            - cache-push@2.0.5: {}
+            - slack@3.1.2:
+                  inputs:
+                      - channel_on_error: "#notif-deploy-mobile"
+                      - webhook_url: "$SLACK_WEBHOOK"
+                      - text: ''
+                      - emoji: ":robot_face:"
+                      - channel: "#notif-deploy-mobile"
+        description: Run all tests.
+        envs:
+            - opts:
+                  is_expand: false
+              IS_TEST: 'true'
+    is_deploy:
+        steps:
+            - activate-ssh-key@3.1.1:
+                  run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+            - cache-pull@2.0.1: {}
+            - git-clone: {}
+            - install-missing-android-tools@2.1.1: {}
+            - script@1.1.5:
+                  inputs:
+                      - content: |-
+                            #!/usr/bin/env bash
+                            # fail if any commands fails
+                            set -e
+                            # debug log
+                            set -x
+
+                            bash ./tools/setup-release.sh
+                  title: Setup release tools
+            - fastlane@2.3.12:
+                  inputs:
+                      - lane: deploy type:$BITRISE_GIT_TAG
+                  title: Fastlane deploy
+            - cache-push@2.0.5: {}
+            - deploy-to-bitrise-io@1.3.10: {}
+            - slack@2.7.3:
+                  inputs:
+                      - channel: "#notif-deploy-mobile"
+                      - channel_on_error: "#notif-deploy-mobile"
+                      - pretext_on_error: "*Client Deploy Failed!*"
+                      - pretext: "*Client Deploy Succeeded, PR Ready!*"
+                      - emoji: ":robot_face:"
+                      - buttons: |-
+                            View Build|${BITRISE_BUILD_URL}
+                            View App|${BITRISE_APP_URL}
+                            View PR|${GITHUB_PR_URL}
+                      - title_link: "$GITHUB_PR_URL"
+                      - webhook_url: "$SLACK_WEBHOOK"
+        description: Run all tests and deploy the new library version.
+    none:
+        description: Dummy workflow to exclude gh-pages from CI.
+    artifact_deploy:
+        steps:
+            - activate-ssh-key@3.1.1:
+                  run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+            - git-clone@4.0.9: {}
+            - cache-pull@2.0.1: {}
+            - install-missing-android-tools@2.1.1: {}
+            - install-bundler@1.0.0: {}
+            - fastlane@2.3.12:
+                  inputs:
+                      - lane: deploy $BITRISE_GIT_TAG
+            - deploy-to-bitrise-io@1.3.10: {}
+            - cache-push@2.0.5: {}
+            - slack@3.1.2:
+                  inputs:
+                      - channel_on_error: "#notif-deploy-mobile"
+                      - webhook_url: "$SLACK_WEBHOOK"
+                      - text: ''
+                      - emoji: ":robot_face:"
+                      - channel: "#notif-deploy-mobile"
+        description: Run all tests.
+        envs:
+            - opts:
+                  is_expand: false
+              IS_TEST: 'true'

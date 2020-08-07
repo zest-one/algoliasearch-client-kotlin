@@ -234,6 +234,8 @@ bintray {
             vcsTag = Library.version
         }
     }
+
+    dryRun = true
 }
 
 tasks {
