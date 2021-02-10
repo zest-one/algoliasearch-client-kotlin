@@ -1,7 +1,5 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
-import java.net.URI
+import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
 buildscript {
     repositories {
@@ -17,29 +15,18 @@ plugins {
     kotlin("multiplatform") version "1.4.10"
     kotlin("plugin.serialization") version "1.4.10"
     id("maven-publish")
+    id("signing")
 }
 
 apply(plugin = "com.diffplug.spotless")
 
 repositories {
-    jcenter()
-    google()
     mavenCentral()
-    maven { url = URI("https://dl.bintray.com/kotlin/ktor") }
-    maven { url = URI("https://kotlin.bintray.com/kotlinx") }
-    maven { url = URI("https://oss.sonatype.org/content/repositories/snapshots") }
+    google()
 }
 
 version = Library.version
 group = Library.group
-
-allprojects {
-    tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>> {
-        kotlinOptions {
-            freeCompilerArgs = listOfNotNull("-Xopt-in=kotlin.RequiresOptIn")
-        }
-    }
-}
 
 kotlin {
     explicitApi()
@@ -89,12 +76,9 @@ val javadocJar by tasks.creating(Jar::class) {
 
 tasks {
 
-    withType<KotlinCompile> {
+    withType<KotlinCompile<*>>().configureEach {
         dependsOn("copyTemplates")
-    }
-
-    withType<KotlinCompileCommon> {
-        dependsOn("copyTemplates")
+        kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
 
     register(name = "copyTemplates", type = Copy::class) {
@@ -103,10 +87,10 @@ tasks {
         expand("projectVersion" to Library.version)
         filteringCharset = "UTF-8"
     }
-}
 
-tasks.withType<Test> {
-    maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
+    withType<Test> {
+        maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
+    }
 }
 
 configure<SpotlessExtension> {
@@ -118,19 +102,20 @@ configure<SpotlessExtension> {
     }
 }
 
-
 //** Publish **//
 
 publishing {
     repositories {
         maven {
-            url = uri("https://api.bintray.com/maven/algolia/maven/algoliasearch-client-kotlin/;publish=0")
+            name = "MavenCentral"
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2")
             credentials {
-                username = System.getenv("BINTRAY_USER")
-                password = System.getenv("BINTRAY_KEY")
+                username = System.getenv("SONATYPE_USER")
+                password = System.getenv("SONATYPE_KEY")
             }
         }
     }
+
     publications.withType<MavenPublication>().all {
         groupId = Library.group
         version = Library.version
@@ -141,23 +126,30 @@ publishing {
 
         pom.withXml {
             asNode().apply {
+                appendNode("name", "Algolia Search API Client for Kotlin")
                 appendNode("description",
                     "Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries," +
                         "and pre-built integrations. Algolia API Client for Kotlin lets you easily use the Algolia Search" +
                         "REST API from your JVM project, such as Android or backend implementations.")
                 appendNode("url", "https://github.com/algolia/algoliasearch-client-kotlin")
-                appendNode("licenses").appendNode("license").apply {
-                    appendNode("name", "MIT")
-                    appendNode("url", "http://www.opensource.org/licenses/mit-license.php")
-                    appendNode("distribution", "repo")
-                }
-                appendNode("developers").appendNode("developer").apply {
-                    appendNode("id", "algolia")
-                    appendNode("name", "The Algolia Team")
-                    appendNode("email", "hey@algolia.com")
-                }
+                appendNode("licenses")
+                    .appendNode("license").apply {
+                        appendNode("name", "MIT")
+                        appendNode("url", "http://www.opensource.org/licenses/mit-license.php")
+                        appendNode("distribution", "repo")
+                    }
+                appendNode("developers")
+                    .appendNode("developer").apply {
+                        appendNode("id", "algolia")
+                        appendNode("name", "The Algolia Team")
+                        appendNode("email", "hey@algolia.com")
+                        appendNode("organization", "Algolia")
+                        appendNode("organizationUrl", "https://algolia.com")
+                    }
                 appendNode("scm").apply {
-                    appendNode("url", "https://github.com/algolia/algoliasearch-client-kotlin.git")
+                    appendNode("url", "https://github.com/algolia/algoliasearch-client-kotlin")
+                    appendNode("connection", "scm:git:git://github.com/algolia/algoliasearch-client-kotlin.git")
+                    appendNode("developerConnection", "scm:git:ssh://github.com:algolia/algoliasearch-client-kotlin.git")
                 }
             }
         }
@@ -167,4 +159,12 @@ publishing {
         val targetPublication = publications.withType<MavenPublication>().findByName(target.name)
         targetPublication?.artifact(javadocJar)
     }
+}
+
+signing {
+    val signingKeyId = System.getenv("SIGNING_KEY_ID")
+    val signingKey = System.getenv("SIGNING_KEY")
+    val signingPassword = System.getenv("SIGNING_PASSWORD")
+    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+    sign(publishing.publications)
 }
