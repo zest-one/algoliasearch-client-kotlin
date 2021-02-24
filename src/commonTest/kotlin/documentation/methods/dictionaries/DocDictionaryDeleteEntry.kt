@@ -1,5 +1,6 @@
 package documentation.methods.dictionaries
 
+import com.algolia.search.endpoint.extension.deleteStopwordEntries
 import com.algolia.search.endpoint.extension.replaceCompoundEntries
 import com.algolia.search.endpoint.extension.replacePluralEntries
 import com.algolia.search.endpoint.extension.replaceStopwordEntries
@@ -16,48 +17,15 @@ import kotlin.test.Test
 import runBlocking
 
 @Ignore
-class DocDictionaryReplaceEntry {
+class DocDictionaryDeleteEntry {
 
     @Test
-    fun snippetStopword() {
+    fun snippet() {
         runBlocking {
-            val entry = DictionaryEntry.Stopword(
-                objectID = ObjectID("MyObjectID"),
-                language = Language.English,
-                word = "upper"
-            )
-            client.replaceDictionaryEntries(Dictionary.Stopwords, listOf(entry))
+            val objectID = ObjectID("MyObjectID")
+            client.deleteDictionaryEntries(Dictionary.Stopwords, listOf(objectID))
             // or using extension function:
-            client.replaceStopwordEntries(listOf(entry))
-        }
-    }
-
-    @Test
-    fun snippetPlural() {
-        runBlocking {
-            val entry = DictionaryEntry.Plural(
-                objectID = ObjectID("MyObjectID"),
-                language = Language.French,
-                words = listOf("cheval", "chevaux")
-            )
-            client.replaceDictionaryEntries(Dictionary.Plurals, listOf(entry))
-            // or using extension function:
-            client.replacePluralEntries(listOf(entry))
-        }
-    }
-
-    @Test
-    fun snippetCompound() {
-        runBlocking {
-            val entry = DictionaryEntry.Compound(
-                objectID = ObjectID("MyObjectID"),
-                language = Language.Dutch,
-                word = "kopfschmerztablette",
-                decomposition = listOf("kopf", "schmerz", "tablette")
-            )
-            client.replaceDictionaryEntries(Dictionary.Compounds, listOf(entry))
-            // or using extension function:
-            client.replaceCompoundEntries(listOf(entry))
+            client.deleteStopwordEntries(listOf(objectID))
         }
     }
 }
