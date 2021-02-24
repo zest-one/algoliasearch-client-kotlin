@@ -16,7 +16,7 @@ import kotlin.test.Test
 import runBlocking
 
 @Ignore
-class DocDictionaryReplaceEntry {
+class DocDictionaryReplaceEntries {
 
     @Test
     fun snippetStopword() {

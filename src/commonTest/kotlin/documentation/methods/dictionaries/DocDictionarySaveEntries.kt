@@ -13,7 +13,7 @@ import kotlin.test.Test
 import runBlocking
 
 @Ignore
-class DocDictionarySaveEntry {
+class DocDictionarySaveEntries {
 
     @Test
     fun snippetStopword() {

@@ -192,7 +192,7 @@ public suspend fun EndpointDictionary.replaceCompoundEntries(
  *
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.clearStopwordsEntries(requestOptions: RequestOptions? = null): ResponseDictionary {
+public suspend fun EndpointDictionary.clearStopwordEntries(requestOptions: RequestOptions? = null): ResponseDictionary {
     return clearDictionaryEntries(Dictionary.Stopwords)
 }
 
@@ -201,7 +201,7 @@ public suspend fun EndpointDictionary.clearStopwordsEntries(requestOptions: Requ
  *
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.clearPluralsEntries(requestOptions: RequestOptions? = null): ResponseDictionary {
+public suspend fun EndpointDictionary.clearPluralEntries(requestOptions: RequestOptions? = null): ResponseDictionary {
     return clearDictionaryEntries(Dictionary.Plurals)
 }
 
@@ -210,7 +210,7 @@ public suspend fun EndpointDictionary.clearPluralsEntries(requestOptions: Reques
  *
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.clearCompoundsEntries(requestOptions: RequestOptions? = null): ResponseDictionary {
+public suspend fun EndpointDictionary.clearCompoundEntries(requestOptions: RequestOptions? = null): ResponseDictionary {
     return clearDictionaryEntries(Dictionary.Compounds)
 }
 //endregion
