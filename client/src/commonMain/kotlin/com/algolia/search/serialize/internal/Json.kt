@@ -1,5 +1,6 @@
 package com.algolia.search.serialize.internal
 
+import com.algolia.search.InternalAlgoliaClientApi
 import com.algolia.search.model.indexing.DeleteByQuery
 import com.algolia.search.model.internal.request.RequestAPIKey
 import com.algolia.search.model.internal.request.RequestMultipleQueries
@@ -21,7 +22,8 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
 
-internal val Json = Json { encodeDefaults = true }
+@InternalAlgoliaClientApi
+public val Json: Json = Json { encodeDefaults = true }
 internal val JsonNoDefaults = Json.Default
 internal val JsonNonStrict = Json {
     ignoreUnknownKeys = true

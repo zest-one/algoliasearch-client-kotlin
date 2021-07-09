@@ -1,5 +1,6 @@
 package com.algolia.search.configuration.internal.extension
 
+import com.algolia.search.InternalAlgoliaClientApi
 import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.Configuration
@@ -20,7 +21,8 @@ import io.ktor.client.request.header
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 
-internal fun Configuration.getHttpClient() = engine?.let {
+@InternalAlgoliaClientApi
+public fun Configuration.getHttpClient(): HttpClient = engine?.let {
     HttpClient(it) { configure(this@getHttpClient) }
 } ?: HttpClient { configure(this@getHttpClient) }
 

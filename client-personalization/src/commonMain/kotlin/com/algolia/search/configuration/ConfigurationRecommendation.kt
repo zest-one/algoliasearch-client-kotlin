@@ -3,7 +3,6 @@
 package com.algolia.search.configuration
 
 import com.algolia.search.client.ClientPersonalization
-import com.algolia.search.client.ClientRecommendation
 import com.algolia.search.configuration.internal.ConfigurationPersonalizationImpl
 import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
@@ -11,7 +10,7 @@ import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
 import com.algolia.search.configuration.internal.extension.toPersonalization
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
-import com.algolia.search.transport.internal.hosts
+import com.algolia.search.internal.transport.hosts
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel

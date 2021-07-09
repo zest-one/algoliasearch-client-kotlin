@@ -63,5 +63,3 @@ public interface EndpointPersonalization {
     ): PersonalizationStrategy
 }
 
-@Deprecated("use EndpointPersonalization instead", replaceWith = ReplaceWith("EndpointPersonalization"))
-public typealias EndpointRecommendation = EndpointPersonalization

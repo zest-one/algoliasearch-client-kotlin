@@ -2,6 +2,7 @@
 
 package com.algolia.search.configuration.internal
 
+import com.algolia.search.InternalAlgoliaClientApi
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
@@ -14,7 +15,8 @@ internal class CredentialsImpl(
 /**
  * Create [Credentials] instance.
  */
-internal fun Credentials(
+@InternalAlgoliaClientApi
+public fun Credentials(
     applicationID: ApplicationID,
     apiKey: APIKey,
 ): Credentials = CredentialsImpl(applicationID, apiKey)

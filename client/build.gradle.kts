@@ -24,6 +24,7 @@ kotlin {
             languageSettings.apply {
                 progressiveMode = true
                 useExperimentalAnnotation("kotlin.RequiresOptIn")
+                useExperimentalAnnotation("com.algolia.search.InternalAlgoliaClientApi")
             }
         }
         val commonMain by getting {
@@ -67,10 +68,6 @@ tasks {
 
     withType<KotlinCompile> {
         dependsOn(copyTemplates)
-    }
-
-    withType<Test> {
-        maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
     }
 }
 

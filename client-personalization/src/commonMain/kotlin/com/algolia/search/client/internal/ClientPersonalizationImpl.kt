@@ -7,8 +7,8 @@ import com.algolia.search.endpoint.EndpointPersonalization
 import com.algolia.search.endpoint.internal.EndpointPersonalization
 import com.algolia.search.transport.internal.Transport
 
-internal class ClientPersonalizationImpl internal constructor(
-    internal val transport: Transport,
+internal class ClientPersonalizationImpl(
+    private val transport: Transport
 ) : ClientPersonalization,
     EndpointPersonalization by EndpointPersonalization(transport),
     Configuration by transport,

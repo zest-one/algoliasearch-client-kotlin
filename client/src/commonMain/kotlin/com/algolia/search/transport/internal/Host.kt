@@ -1,5 +1,6 @@
 package com.algolia.search.transport.internal
 
+import com.algolia.search.InternalAlgoliaClientApi
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.RetryableHost
@@ -17,7 +18,7 @@ internal val ApplicationID.searchHosts
 
 internal val insightHosts = listOf(RetryableHost("insights.algolia.io"))
 internal val Region.Analytics.hosts get() = listOf(RetryableHost("analytics.$this.algolia.com"))
-internal val Region.Personalization.hosts get() = listOf(RetryableHost("personalization.$this.algolia.com"))
+
 internal val placesHosts = listOf(
     RetryableHost("places-dsn.algolia.net"),
     RetryableHost("places-1.algolianet.com"),
@@ -25,19 +26,22 @@ internal val placesHosts = listOf(
     RetryableHost("places-3.algolianet.com")
 )
 
-internal fun RetryableHost.reset() {
+@InternalAlgoliaClientApi
+public fun RetryableHost.reset() {
     lastUpdated = Time.getCurrentTimeMillis()
     isUp = true
     retryCount = 0
 }
 
-internal fun RetryableHost.hasTimedOut() {
+@InternalAlgoliaClientApi
+public fun RetryableHost.hasTimedOut() {
     isUp = true
     lastUpdated = Time.getCurrentTimeMillis()
     retryCount += 1
 }
 
-internal fun RetryableHost.hasFailed() {
+@InternalAlgoliaClientApi
+public fun RetryableHost.hasFailed() {
     isUp = false
     lastUpdated = Time.getCurrentTimeMillis()
 }

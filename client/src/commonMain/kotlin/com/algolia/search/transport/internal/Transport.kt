@@ -1,5 +1,6 @@
 package com.algolia.search.transport.internal
 
+import com.algolia.search.InternalAlgoliaClientApi
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.Configuration
@@ -7,7 +8,6 @@ import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.exception.UnreachableHostsException
 import com.algolia.search.transport.RequestOptions
-import io.ktor.client.features.HttpRequestTimeoutException
 import io.ktor.client.features.ResponseException
 import io.ktor.client.features.timeout
 import io.ktor.client.request.HttpRequestBuilder
@@ -17,21 +17,24 @@ import io.ktor.http.URLProtocol
 import io.ktor.network.sockets.ConnectTimeoutException
 import io.ktor.network.sockets.SocketTimeoutException
 import io.ktor.utils.io.errors.IOException
+import kotlin.math.floor
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlin.math.floor
 
-internal class Transport(
+@InternalAlgoliaClientApi
+public class Transport(
     configuration: Configuration,
     private val credentialsOrNull: Credentials?,
 ) : Configuration by configuration {
 
     private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
-    private val mutex = Mutex()
 
-    val credentials get() = credentialsOrNull!!
+    @PublishedApi
+    internal val mutex: Mutex = Mutex()
 
-    suspend fun callableHosts(callType: CallType): List<RetryableHost> {
+    public val credentials: Credentials get() = credentialsOrNull!!
+
+    public suspend fun callableHosts(callType: CallType): List<RetryableHost> {
         return mutex.withLock {
             hosts.expireHostsOlderThan(hostStatusExpirationDelayMS)
             val hostsCallType = hosts.filterCallType(callType)
@@ -43,7 +46,8 @@ internal class Transport(
         }
     }
 
-    private fun httpRequestBuilder(
+    @PublishedApi
+    internal fun httpRequestBuilder(
         httpMethod: HttpMethod,
         path: String,
         requestOptions: RequestOptions?,
@@ -71,7 +75,7 @@ internal class Transport(
         }
     }
 
-    suspend inline fun <reified T> request(
+    public suspend inline fun <reified T> request(
         httpMethod: HttpMethod,
         callType: CallType,
         path: String,
@@ -92,7 +96,7 @@ internal class Transport(
             } catch (exception: Exception) {
                 errors += exception
                 when (exception) {
-                    is HttpRequestTimeoutException, is SocketTimeoutException, is ConnectTimeoutException -> mutex.withLock { host.hasTimedOut() }
+                    is SocketTimeoutException, is ConnectTimeoutException -> mutex.withLock { host.hasTimedOut() }
                     is IOException -> mutex.withLock { host.hasFailed() }
                     is ResponseException -> {
                         val value = exception.response.status.value
@@ -110,7 +114,8 @@ internal class Transport(
     /**
      * Set socket read/write timeout.
      */
-    private fun setTimeout(
+    @PublishedApi
+    internal fun setTimeout(
         requestBuilder: HttpRequestBuilder,
         requestOptions: RequestOptions?,
         callType: CallType,
