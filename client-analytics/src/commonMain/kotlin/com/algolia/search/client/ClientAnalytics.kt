@@ -1,5 +1,3 @@
-@file:Suppress("FunctionName")
-
 package com.algolia.search.client
 
 import com.algolia.search.client.internal.ClientAnalyticsImpl

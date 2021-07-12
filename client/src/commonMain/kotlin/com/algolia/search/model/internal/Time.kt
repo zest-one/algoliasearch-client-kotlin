@@ -1,6 +1,9 @@
 package com.algolia.search.model.internal
 
-internal expect object Time {
+import com.algolia.search.InternalAlgoliaClientApi
 
-    fun getCurrentTimeMillis(): Long
+@InternalAlgoliaClientApi
+public expect object Time {
+
+    public fun getCurrentTimeMillis(): Long
 }

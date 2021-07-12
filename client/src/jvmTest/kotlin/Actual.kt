@@ -33,11 +33,6 @@ internal actual val clientMcm = ClientSearch(
     System.getenv("ALGOLIA_ADMIN_ID_MCM").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_MCM").toAPIKey()
 )
-internal actual val clientAnalytics = ClientAnalytics(
-    System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
-    System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey(),
-    Region.Analytics.US
-)
 internal actual val clientInsights = ClientInsights(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()

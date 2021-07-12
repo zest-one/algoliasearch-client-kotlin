@@ -28,12 +28,15 @@ kotlin {
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(project(":client-test"))
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
             }
         }
         val jvmMain by getting
         val jvmTest by getting {
             dependencies {
+                implementation(kotlin("test-junit"))
                 api(libs.ktor.client.okhttp)
             }
         }

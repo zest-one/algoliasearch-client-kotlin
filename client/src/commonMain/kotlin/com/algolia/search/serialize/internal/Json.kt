@@ -33,7 +33,8 @@ internal val JsonNonStrict = Json {
 }
 
 @OptIn(ExperimentalSerializationApi::class)
-internal val JsonDebug = Json {
+@InternalAlgoliaClientApi
+public val JsonDebug: Json = Json {
     prettyPrint = true
     prettyPrintIndent = "  "
     encodeDefaults = false

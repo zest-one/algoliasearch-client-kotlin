@@ -5,10 +5,10 @@ import com.algolia.search.model.personalization.EventScoring
 import com.algolia.search.model.personalization.FacetScoring
 import com.algolia.search.model.personalization.PersonalizationStrategy
 import com.algolia.search.model.personalization.SetPersonalizationStrategyResponse
+import com.algolia.search.test.shouldEqual
 import io.ktor.client.features.ClientRequestException
 import io.ktor.http.HttpStatusCode
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlinx.coroutines.runBlocking
 
 internal class TestSuitePersonalization {
@@ -38,13 +38,13 @@ internal class TestSuitePersonalization {
             val response = SetPersonalizationStrategyResponse(200, "Strategy was successfully updated")
 
             try {
-                assertEquals(clientPersonalization.setPersonalizationStrategy(strategy), response)
+                clientPersonalization.setPersonalizationStrategy(strategy) shouldEqual response
             } catch (e: ClientRequestException) {
                 // The personalization API is now limiting the number of setPersonalizationStrategy()` successful calls
                 // to 15 per day. If the 429 error is returned, the response is considered a "success".
                 if (e.response.status != HttpStatusCode.TooManyRequests) throw e
             }
-            assertEquals(clientPersonalization.getPersonalizationStrategy(), strategy)
+            clientPersonalization.getPersonalizationStrategy() shouldEqual strategy
         }
     }
 }

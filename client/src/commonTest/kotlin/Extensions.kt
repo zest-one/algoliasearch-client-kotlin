@@ -24,31 +24,6 @@ internal val objectIDA = ObjectID("442854")
 internal val objectIDB = ObjectID("322601")
 internal val nestedLists = listOf(listOf(string), listOf(string))
 internal val attributes = listOf(attributeA, attributeB)
-internal val renderingContent = RenderingContent(
-    facetOrdering = FacetOrdering(
-        facets = FacetsOrder(
-            order = listOf("size", "brand", "country", "color")
-        ),
-        values = mapOf(
-            Attribute("brand") to FacetValuesOrder(
-                order = listOf("Uniqlo"),
-                sortRemainingBy = SortRule.Alpha
-            ),
-            Attribute("color") to FacetValuesOrder(
-                order = listOf("red", "green", "blue"),
-                sortRemainingBy = SortRule.Count
-            ),
-            Attribute("country") to FacetValuesOrder(
-                order = listOf("France", "Germany", "Finland"),
-                sortRemainingBy = SortRule.Hidden
-            ),
-            Attribute("size") to FacetValuesOrder(
-                order = emptyList(),
-                sortRemainingBy = SortRule.Count
-            )
-        )
-    )
-)
 
 internal val nestedListsJson = buildJsonArray {
     add(buildJsonArray { add(string) })

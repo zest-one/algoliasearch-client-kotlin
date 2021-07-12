@@ -1,3 +1,6 @@
 package com.algolia.search.model.internal.request
 
-internal const val EmptyBody = ""
+import com.algolia.search.InternalAlgoliaClientApi
+
+@InternalAlgoliaClientApi
+public const val EmptyBody: String = ""

@@ -10,7 +10,7 @@ import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 
 internal class ClientAnalyticsImpl internal constructor(
-    internal val transport: Transport,
+    private val transport: Transport,
 ) : ClientAnalytics,
     EndpointAnalytics by EndpointAnalytics(transport),
     Configuration by transport,

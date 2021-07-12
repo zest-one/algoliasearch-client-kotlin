@@ -2,7 +2,6 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
-import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.response.ResponseABTest
 import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.creation.CreationABTest

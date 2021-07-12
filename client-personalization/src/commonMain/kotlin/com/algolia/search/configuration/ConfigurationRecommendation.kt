@@ -1,5 +1,3 @@
-@file:Suppress("FunctionName")
-
 package com.algolia.search.configuration
 
 import com.algolia.search.client.ClientPersonalization
@@ -7,10 +5,9 @@ import com.algolia.search.configuration.internal.ConfigurationPersonalizationImp
 import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
-import com.algolia.search.configuration.internal.extension.toPersonalization
+import com.algolia.search.internal.hosts
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
-import com.algolia.search.internal.transport.hosts
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
@@ -55,55 +52,6 @@ public fun ConfigurationPersonalization(
     applicationID = applicationID,
     apiKey = apiKey,
     region = region,
-    writeTimeout = writeTimeout,
-    readTimeout = readTimeout,
-    logLevel = logLevel,
-    hosts = hosts,
-    defaultHeaders = defaultHeaders,
-    engine = engine,
-    httpClientConfig = httpClientConfig
-)
-
-/**
- * Configuration used by [ClientRecommendation].
- */
-@Deprecated("use ConfigurationPersonalization instead", replaceWith = ReplaceWith("ConfigurationPersonalization"))
-public typealias ConfigurationRecommendation = ConfigurationPersonalization
-
-/**
- * Create a [ConfigurationAnalytics] instance.
- *
- * @param applicationID application ID
- * @param apiKey API key
- * @param region recommendation region
- * @param writeTimeout write timout
- * @param readTimeout read timeout
- * @param logLevel logging level
- * @param hosts recommendation region hosts
- * @param defaultHeaders default headers
- * @param engine http client engine
- * @param httpClientConfig http client configuration
- */
-@Deprecated(
-    "use ConfigurationPersonalization instead",
-    replaceWith = ReplaceWith("ConfigurationPersonalization(applicationID, apiKey, region, writeTimeout, readTimeout, logLevel, hosts, defaultHeaders, engine, httpClientConfig)")
-)
-@Suppress("DEPRECATION")
-public fun ConfigurationRecommendation(
-    applicationID: ApplicationID,
-    apiKey: APIKey,
-    region: Region.Recommendation,
-    writeTimeout: Long = DEFAULT_WRITE_TIMEOUT,
-    readTimeout: Long = DEFAULT_READ_TIMEOUT,
-    logLevel: LogLevel = DEFAULT_LOG_LEVEL,
-    hosts: List<RetryableHost> = region.toPersonalization().hosts,
-    defaultHeaders: Map<String, String>? = null,
-    engine: HttpClientEngine? = null,
-    httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
-): ConfigurationRecommendation = ConfigurationPersonalization(
-    applicationID = applicationID,
-    apiKey = apiKey,
-    region = region.toPersonalization(),
     writeTimeout = writeTimeout,
     readTimeout = readTimeout,
     logLevel = logLevel,
