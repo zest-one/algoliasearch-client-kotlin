@@ -1,0 +1,149 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../algoliasearch-client-kotlin/1.13.0-SNAPSHOT-zest/algoliasearch-client-kotlin-1.13.0-SNAPSHOT-zest.module",
+    "group": "com.algolia",
+    "module": "algoliasearch-client-kotlin",
+    "version": "1.13.0-SNAPSHOT-zest",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "iosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-json",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-logging",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-serialization",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.6.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-ios",
+          "version": {
+            "requires": "1.6.5"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "client.klib",
+          "url": "algoliasearch-client-kotlin-iossimulatorarm64-1.13.0-SNAPSHOT-zest.klib",
+          "size": 1488887,
+          "sha512": "48d19f4bf364713dd7b6d6c059850431dcd10985e2ea165559c384c385297c9fb339b7855b72edb2f6ed9e8a951cdf5b2bfb19ebd59c92aa3c305bb7bc951c4f",
+          "sha256": "9cfa13aab31c97bbf3f2f314d15f420d4b67817ed96427bde298abda3bc42edc",
+          "sha1": "76bbcb5e5a5fe208643e9e20a5fd5d573636cf37",
+          "md5": "d154390500896bd92c2c91b7cda89f64"
+        }
+      ]
+    },
+    {
+      "name": "iosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-json",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-logging",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-serialization",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.6.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-ios",
+          "version": {
+            "requires": "1.6.5"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "client-iossimulatorarm64-1.13.0-SNAPSHOT-zest-metadata.jar",
+          "url": "algoliasearch-client-kotlin-iossimulatorarm64-1.13.0-SNAPSHOT-zest-metadata.jar",
+          "size": 12870,
+          "sha512": "b46d321f2ad953aa07b4682dbfdba8368504642ac20ec9b3451c16e5019355b88a378ac3ff0466cb581828c9ac38d5a3a99f71826bc8b98df1939f16fb0302e4",
+          "sha256": "5c37c09fee3f57874724908f4f5ab895987892c10d419f91b121ba30d5cca3a5",
+          "sha1": "97dc75172909056127f17c923734d632387fa0ce",
+          "md5": "76bc6be2185cb70173dd71ddb3e0f850"
+        }
+      ]
+    }
+  ]
+}

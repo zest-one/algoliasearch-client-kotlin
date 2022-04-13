@@ -1,0 +1,265 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.algolia",
+    "module": "algoliasearch-client-kotlin",
+    "version": "1.13.0-SNAPSHOT-zest",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-json",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-logging",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-serialization",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.6.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-ios",
+          "version": {
+            "requires": "1.6.5"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "client-metadata-1.13.0-SNAPSHOT-zest-all.jar",
+          "url": "algoliasearch-client-kotlin-1.13.0-SNAPSHOT-zest-all.jar",
+          "size": 186530,
+          "sha512": "3408616db1cf1da075a96a6f9038cf2043464988910bd4359e396de2eaf782daa64740d96def11bd43a26f815e479455638b7a4c3c36bbcecd012019ed1be0fc",
+          "sha256": "4091917d57bde71bd122f44d38af01d06119d02280a2861882b8755f4e17c102",
+          "sha1": "d7d46b99f225ce80cb5a735f0dd80d8379da7075",
+          "md5": "5eac36d6711516bdac833e4506a04cc2"
+        }
+      ]
+    },
+    {
+      "name": "commonMainMetadataElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-json",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-logging",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-serialization",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.6.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "client-1.13.0-SNAPSHOT-zest.jar",
+          "url": "algoliasearch-client-kotlin-1.13.0-SNAPSHOT-zest.jar",
+          "size": 375085,
+          "sha512": "3f2b464b5f0c2ea2fa5c52eb90c836794f5fb1e073a8f6e76a77ebdb47539711aa2267432b036ebc5aa972419e6816527b38026e0697eb7a071faba7fc9ee035",
+          "sha256": "8af7959be3729f89804ed01fa9b5a01632e248c57952fe843e9ce96b57cacf1e",
+          "sha1": "e4b8b9bad16004e4318056970a88954f8c84cc4c",
+          "md5": "e07180aa07875dbce25fe422d4d34e8f"
+        }
+      ]
+    },
+    {
+      "name": "iosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../algoliasearch-client-kotlin-iosarm64/1.13.0-SNAPSHOT-zest/algoliasearch-client-kotlin-iosarm64-1.13.0-SNAPSHOT-zest.module",
+        "group": "com.algolia",
+        "module": "algoliasearch-client-kotlin-iosarm64",
+        "version": "1.13.0-SNAPSHOT-zest"
+      }
+    },
+    {
+      "name": "iosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../algoliasearch-client-kotlin-iosarm64/1.13.0-SNAPSHOT-zest/algoliasearch-client-kotlin-iosarm64-1.13.0-SNAPSHOT-zest.module",
+        "group": "com.algolia",
+        "module": "algoliasearch-client-kotlin-iosarm64",
+        "version": "1.13.0-SNAPSHOT-zest"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../algoliasearch-client-kotlin-iossimulatorarm64/1.13.0-SNAPSHOT-zest/algoliasearch-client-kotlin-iossimulatorarm64-1.13.0-SNAPSHOT-zest.module",
+        "group": "com.algolia",
+        "module": "algoliasearch-client-kotlin-iossimulatorarm64",
+        "version": "1.13.0-SNAPSHOT-zest"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../algoliasearch-client-kotlin-iossimulatorarm64/1.13.0-SNAPSHOT-zest/algoliasearch-client-kotlin-iossimulatorarm64-1.13.0-SNAPSHOT-zest.module",
+        "group": "com.algolia",
+        "module": "algoliasearch-client-kotlin-iossimulatorarm64",
+        "version": "1.13.0-SNAPSHOT-zest"
+      }
+    },
+    {
+      "name": "iosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../algoliasearch-client-kotlin-iosx64/1.13.0-SNAPSHOT-zest/algoliasearch-client-kotlin-iosx64-1.13.0-SNAPSHOT-zest.module",
+        "group": "com.algolia",
+        "module": "algoliasearch-client-kotlin-iosx64",
+        "version": "1.13.0-SNAPSHOT-zest"
+      }
+    },
+    {
+      "name": "iosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../algoliasearch-client-kotlin-iosx64/1.13.0-SNAPSHOT-zest/algoliasearch-client-kotlin-iosx64-1.13.0-SNAPSHOT-zest.module",
+        "group": "com.algolia",
+        "module": "algoliasearch-client-kotlin-iosx64",
+        "version": "1.13.0-SNAPSHOT-zest"
+      }
+    },
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../algoliasearch-client-kotlin-jvm/1.13.0-SNAPSHOT-zest/algoliasearch-client-kotlin-jvm-1.13.0-SNAPSHOT-zest.module",
+        "group": "com.algolia",
+        "module": "algoliasearch-client-kotlin-jvm",
+        "version": "1.13.0-SNAPSHOT-zest"
+      }
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../algoliasearch-client-kotlin-jvm/1.13.0-SNAPSHOT-zest/algoliasearch-client-kotlin-jvm-1.13.0-SNAPSHOT-zest.module",
+        "group": "com.algolia",
+        "module": "algoliasearch-client-kotlin-jvm",
+        "version": "1.13.0-SNAPSHOT-zest"
+      }
+    }
+  ]
+}

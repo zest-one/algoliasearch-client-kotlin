@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.algolia</groupId>
+  <artifactId>algoliasearch-client-kotlin</artifactId>
+  <versioning>
+    <latest>1.13.0-SNAPSHOT-zest</latest>
+    <release>1.13.0-SNAPSHOT-zest</release>
+    <versions>
+      <version>1.13.0-SNAPSHOT-zest</version>
+    </versions>
+    <lastUpdated>20220413154929</lastUpdated>
+  </versioning>
+</metadata>

@@ -1,0 +1,149 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../algoliasearch-client-kotlin/1.13.0-SNAPSHOT-zest/algoliasearch-client-kotlin-1.13.0-SNAPSHOT-zest.module",
+    "group": "com.algolia",
+    "module": "algoliasearch-client-kotlin",
+    "version": "1.13.0-SNAPSHOT-zest",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "iosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-json",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-logging",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-serialization",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.6.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-ios",
+          "version": {
+            "requires": "1.6.5"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "client.klib",
+          "url": "algoliasearch-client-kotlin-iosx64-1.13.0-SNAPSHOT-zest.klib",
+          "size": 1488783,
+          "sha512": "233a97976341ca3bade86589565c0d31dd524f1f4c23687fb1c9dc7da611255c923ef68b2775426b966418f056e2de0f1235c84f9d6696a9c3bb2637004a2391",
+          "sha256": "3c1e7ed02f129b41a8fa4911f1f990bf1700aea734b25224bdde9cc26569709c",
+          "sha1": "3efbae97d88fd2a87f76da218dc8d33b5867a678",
+          "md5": "9c7006f889b896cdc3b090ddb31a6a7a"
+        }
+      ]
+    },
+    {
+      "name": "iosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-json",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-logging",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-serialization",
+          "version": {
+            "requires": "1.6.5"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.6.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-ios",
+          "version": {
+            "requires": "1.6.5"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "client-iosx64-1.13.0-SNAPSHOT-zest-metadata.jar",
+          "url": "algoliasearch-client-kotlin-iosx64-1.13.0-SNAPSHOT-zest-metadata.jar",
+          "size": 12870,
+          "sha512": "c2777b7988c10a70ed19161f7c7ddc530bf13a017f7bcd8b5fc5d19826fa717931c3da08f837c15e8f9236f8ed3b9cb393ecff6ddcd2ff7e1a960c2b6a4f41d7",
+          "sha256": "1887b0f0c3162aeb28bd3ec5ca3efaf206be9fe8522d85439651358110d7fa04",
+          "sha1": "26c6b91c977d61be66a82b0e0036f162614341b6",
+          "md5": "3a740464597207ae8565aa4601e13b68"
+        }
+      ]
+    }
+  ]
+}
