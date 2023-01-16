@@ -1,0 +1,163 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../algoliasearch-client-kotlin/2.1.1-kmm-zest/algoliasearch-client-kotlin-2.1.1-kmm-zest.module",
+    "group": "com.algolia",
+    "module": "algoliasearch-client-kotlin",
+    "version": "2.1.1-kmm-zest",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "iosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "2.1.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.7.10"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-logging",
+          "version": {
+            "requires": "2.1.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-serialization-kotlinx-json",
+          "version": {
+            "requires": "2.1.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-content-negotiation",
+          "version": {
+            "requires": "2.1.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-darwin",
+          "version": {
+            "requires": "2.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "client.klib",
+          "url": "algoliasearch-client-kotlin-iosx64-2.1.1-kmm-zest.klib",
+          "size": 1494522,
+          "sha512": "02db78d8c25e10efafcc1f6b2ec13336b975c6c119df0e21ecc35bad4cf9479746f2a269feb155195aa9be62525ca17504f7a3151ef5733f3f4b31d8a1705ace",
+          "sha256": "7caa6cb443ef7cc3a0f9ea1390f92657fa6a6129208c0e0cb816e46be4fe1ce7",
+          "sha1": "2b7eaf311e224a7d2ceed9ed13b303e075248ebc",
+          "md5": "dd7a1a0ba71f735db9dfd1fbd354c470"
+        }
+      ]
+    },
+    {
+      "name": "iosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "2.1.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.7.10"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-logging",
+          "version": {
+            "requires": "2.1.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-serialization-kotlinx-json",
+          "version": {
+            "requires": "2.1.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-content-negotiation",
+          "version": {
+            "requires": "2.1.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-darwin",
+          "version": {
+            "requires": "2.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "client-iosx64-2.1.1-kmm-zest-metadata.jar",
+          "url": "algoliasearch-client-kotlin-iosx64-2.1.1-kmm-zest-metadata.jar",
+          "size": 11490,
+          "sha512": "82b84f9731ecf9c0385c39ae5070ebb7b1e32ece8f962d968b3bae41b6db459617b3dade30665fbfbe314c5647f2df6aa646716be0d179ee73dfa62655cee26d",
+          "sha256": "e856be2dc840f4d77cfb9c94ff09ddd54a95bbc9fa183c5f86a3e665ce8279ab",
+          "sha1": "43a04596d7979167dbcaa381d2b6c6e3c27a468f",
+          "md5": "aed810a94e2d9895d6023374734a6a25"
+        }
+      ]
+    }
+  ]
+}
